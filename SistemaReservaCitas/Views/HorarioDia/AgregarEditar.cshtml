@@ -1,0 +1,37 @@
+﻿@model List<SistemaReservaCitas.Models.HorarioAtencionDia>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<h2 class="card-header">
+
+    <a href="~/HorarioDia/AgregarEditar/" class="btn btn-info float-right">Nueva Dia</a>
+</h2>
+
+
+
+<br />
+<table id="DatatableP" class="table">
+    <thead>
+        <tr>
+            <th>ID Atencion Dia </th>
+            <th>DIA</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@(m.horarioAtencionDia_id)</td>
+                <td>@(m.dia)</td>
+                <td style="align-content:center">
+                    
+                    <a href="~/HorarioDia/AgregarEditar/@m.horarioAtencionDia_id" class="btn btn-primary">Agregar Horas</a>
+                    <a href="~/HorarioDia/AgregarEditar/@m.horarioAtencionDia_id" class="btn btn-danger" onclick="return confirm('¿Esta seguro de eliminar el registro?')">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

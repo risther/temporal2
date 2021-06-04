@@ -1,0 +1,65 @@
+﻿@model SistemaReservaCitas.Models.HorarioAtencionDetalle
+@{
+    ViewBag.Title = "AgregarEditar";
+    List<SistemaReservaCitas.Models.HorarioAtencionDetalle> horas = ViewBag.Horas;
+}
+
+<h2>Agregar / Editar</h2>
+
+
+<br />
+<br />
+
+@using (Html.BeginForm("Guardar", "HorarioDiaDetalle", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.horarioAtencionDetalle_id)
+
+    <div class="card">
+        <div class="card-header">Horas</div>
+        <div class="card-body">
+            <div class="form-group">
+                @Html.LabelFor(x => x.horarioAtencionDetalle_id)
+                @Html.TextBoxFor(x => x.horarioAtencionDetalle_id, new { @class = "form-control", disabled = true })
+
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.horarioAtencionDia_id)
+                @Html.TextBoxFor(x => x.horarioAtencionDia_id, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.horarioAtencionDia_id, null, new { @class = "alert-danger", disabled = true })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.hora)
+                <select name="hora" class="form-control">
+                    <option @(Model.hora.Equals("") ? "selected" : "") value="">Seleccione</option>
+
+                    @foreach (var d in horas)
+                    {
+                        <option @(Model.hora.Equals(d.hora) ? "selected" : "") value="@d.hora">@d.hora</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(x => x.hora, null, new { @class = "text-danger" })
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.disponibilidad)
+                <select name="disponibilidad" class="form-control">
+                    <option @(Model.disponibilidad == "" ? "selected" : "" ) value="">Seleccion</option>
+                    <option @(Model.disponibilidad == "D" ? "selected" : "" ) value="D">Disponible</option>
+                    <option @(Model.disponibilidad == "I" ? "selected" : "" ) value="I">No Disponible</option>
+                </select>
+                @Html.ValidationMessageFor(x => x.disponibilidad, null, new { @class = "text-danger" })
+
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">Guardar </button>
+                <a href="~/HorarioDia" class="btn btn-danger">Cancelar</a>
+            </div>
+
+        </div>
+    </div>
+}
